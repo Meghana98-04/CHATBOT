@@ -1,0 +1,57 @@
+1. Problem Statement
+Chatbots are limited by the static knowledge encoded at the time of deployment, which reduces their ability to provide up-to-date responses. In dynamic domains like news, research, or product information, a chatbot must continuously incorporate new knowledge to remain relevant. The goal is to design a system that enables a chatbot to dynamically update its knowledge base and improve its response accuracy over time.
+
+Objective:
+Implement a mechanism to fetch new data periodically from specified sources (e.g., RSS feeds, APIs, documents).
+Update the chatbot’s vector database automatically without manual intervention.
+Ensure the chatbot can reference this new information in real-time responses.
+
+2. Dataset
+The dataset in this scenario is not static. It consists of documents, web pages, or structured data that are continuously added to the knowledge base.
+Example Sources:
+PDF reports, DOCX files, or CSV datasets stored in a directory
+Web pages or RSS feeds from trusted sources
+Company knowledge base or internal documentation
+
+Preprocessing:
+Convert documents into text (PDF → text, DOCX → text)
+Clean text (remove special characters, stopwords if necessary)
+Split into manageable chunks for embedding
+Generate embeddings using an NLP model (e.g., OpenAI’s text-embedding models)
+
+3. Methodology
+Overview: Implement a pipeline that automatically updates the vector database at regular intervals.
+
+Steps:
+Data Ingestion:
+Periodically fetch new documents or content from specified sources.
+Example: Run a cron job every 24 hours or a cloud scheduler to fetch updates.
+
+Text Processing & Embedding:
+Split new documents into chunks.
+Generate embeddings using an embedding model (e.g., OpenAI embeddings).
+
+Vector Database Update:
+Check if new content already exists in the database (avoid duplicates).
+Insert new embeddings into the vector database (e.g., Chroma, Pinecone, Weaviate).
+
+Chatbot Integration:
+When the chatbot receives a query, it retrieves relevant chunks from the vector database.
+Use retrieved content to generate responses via an LLM.
+Automation & Scheduling:
+Implement a scheduled pipeline (Python + cron, or cloud functions) to automate ingestion and embedding.
+
+Evaluation Metrics:
+Relevance of responses (manual or automated evaluation)
+Frequency of knowledge updates successfully incorporated
+Latency of new information appearing in chatbot responses
+
+4. Expected Results
+After implementing the system:
+The chatbot will incorporate newly added documents or data automatically without manual intervention.
+Users will receive up-to-date responses even for newly published content.
+The vector database will grow dynamically, maintaining relevance over time.
+
+
+
+Outcome: A chatbot that remains current and accurate, capable of adapting to a constantly evolving information environment.
